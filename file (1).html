@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Drama Articles | Internet and Gaming News</title>
+
+    <style>
+        :root {
+            --ink: #182230;
+            --muted: #667085;
+            --paper: #f7f8fa;
+            --white: #ffffff;
+            --line: #e4e7ec;
+            --red: #c2414b;
+            --red-dark: #8f2631;
+            --blue: #315c86;
+            --gold: #a36b16;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        header {
+            padding: 70px 20px 60px;
+            color: white;
+            text-align: center;
+            background:
+                linear-gradient(rgba(23, 34, 49, 0.88), rgba(23, 34, 49, 0.94)),
+                url("https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1800&q=80")
+                center / cover;
+        }
+
+        header p {
+            margin: 0 auto;
+            max-width: 680px;
+            color: #d9e1eb;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+        }
+
+        .site-name {
+            margin: 0 0 10px;
+            font-size: clamp(42px, 7vw, 76px);
+            letter-spacing: -2px;
+        }
+
+        .tagline {
+            margin-bottom: 25px !important;
+            color: #f3c6c9 !important;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px !important;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 22px;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(8px);
+        }
+
+        nav a {
+            color: var(--ink);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            color: var(--red);
+        }
+
+        main {
+            width: min(1120px, calc(100% - 36px));
+            margin: 45px auto 80px;
+        }
+
+        .intro {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            align-items: center;
+            padding-bottom: 42px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .intro h2 {
+            margin: 0 0 12px;
+            font-size: 34px;
+            font-weight: normal;
+        }
+
+        .intro p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .coverage-box {
+            padding: 22px;
+            border-left: 4px solid var(--red);
+            background: var(--white);
+            box-shadow: 0 8px 25px rgba(16, 24, 40, 0.06);
+        }
+
+        .coverage-box strong {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--red-dark);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .coverage-box p {
+            font-size: 15px;
+        }
+
+        .notice {
+            margin: 35px 0 50px;
+            padding: 17px 20px;
+            border: 1px solid #ead9bd;
+            background: #fffaf0;
+            color: #694d1c;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .platform-section {
+            margin: 55px 0;
+            scroll-margin-top: 80px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 20px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--ink);
+        }
+
+        .section-heading h2 {
+            margin: 0 0 8px;
+            font-size: 30px;
+            font-weight: normal;
+        }
+
+        .section-heading span {
+            margin-bottom: 10px;
+            color: var(--muted);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .articles {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        article {
+            padding: 27px;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            background: var(--white);
+            box-shadow: 0 5px 18px rgba(16, 24, 40, 0.04);
+        }
+
+        article:hover {
+            border-color: #d8a1a5;
+            box-shadow: 0 9px 25px rgba(16, 24, 40, 0.09);
+        }
+
+        article h3 {
+            margin: 10px 0 8px;
+            font-size: 25px;
+            line-height: 1.2;
+        }
+
+        article p {
+            color: #475467;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .label {
+            padding: 5px 9px;
+            border-radius: 3px;
+            background: #f8e4e5;
+            color: var(--red-dark);
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
+
+        .label.blue {
+            background: #e6eef7;
+            color: var(--blue);
+        }
+
+        .label.gold {
+            background: #fbf0d9;
+            color: var(--gold);
+        }
+
+        .date {
+            color: var(--muted);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+        }
+
+        .source-note {
+            margin-top: 18px;
+            padding-top: 13px;
+            border-top: 1px solid var(--line);
+            color: #98a2b3;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+        }
+
+        footer {
+            padding: 35px 20px;
+            border-top: 1px solid var(--line);
+            background: #172231;
+            color: #cbd5e1;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 760px) {
+            .intro,
+            .articles {
+                grid-template-columns: 1fr;
+            }
+
+            .intro h2 {
+                font-size: 29px;
+            }
+
+            .section-heading {
+                display: block;
+            }
+
+            .section-heading span {
+                display: block;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <p class="tagline">Independent internet culture coverage</p>
+        <h1 class="site-name">Drama Articles</h1>
+        <p>
+            A clear, readable look at the arguments, controversies, and community
+            debates shaping online spaces.
+        </p>
+    </header>
+
+    <nav aria-label="Main navigation">
+        <a href="#roblox">Roblox</a>
+        <a href="#steam">Steam</a>
+        <a href="#tiktok">TikTok</a>
+        <a href="#twitch">Twitch</a>
+        <a href="#youtube">YouTube</a>
+        <a href="#reddit">Reddit</a>
+    </nav>
+
+    <main>
+
+        <section class="intro">
+            <div>
+                <h2>The internet argues. We explain why.</h2>
+                <p>
+                    This edition follows major online controversies reported or
+                    discussed between June 1 and September 11, 2026, with a focus on
+                    gaming platforms, creators, moderation, and digital communities.
+                </p>
+            </div>
+
+            <div class="coverage-box">
+                <strong>Current edition</strong>
+                <p>
+                    June 1 – September 11, 2026
+                </p>
+                <strong>Coverage areas</strong>
+                <p>
+                    Gaming, streaming, social media, creator culture, and platform policy.
+                </p>
+            </div>
+        </section>
+
+        <div class="notice">
+            <strong>About our coverage:</strong>
+            Legal claims and accusations are identified as allegations. Community
+            rumors are not treated as confirmed news unless reliable reporting or
+            official information supports them.
+        </div>
+
+        <section id="roblox" class="platform-section">
+            <div class="section-heading">
+                <h2>Roblox</h2>
+                <span>Safety, moderation, and accountability</span>
+            </div>
+
+            <div class="articles">
+                <article>
+                    <div class="article-meta">
+                        <span class="label">Legal dispute</span>
+                        <span class="date">July–September 11, 2026</span>
+                    </div>
+
+                    <h3>Roblox faces continued pressure over child safety</h3>
+
+                    <p>
+                        Roblox remained at the center of a major child-safety debate
+                        during the summer. Lawsuits and investigations focused on
+                        allegations that the platform did not do enough to prevent
+                        grooming, exploitation, and abuse.
+                    </p>
+
+                    <p>
+                        The discussion has gone beyond individual reports. Parents,
+                        lawmakers, creators, and safety advocates have questioned the
+                        effectiveness of Roblox chat moderation, age checks, parental
+                        controls, and reporting systems.
+                    </p>
+
+                    <p>
+                        Roblox has continued defending its safety measures, while the
+                        legal cases remain unresolved. The controversy is likely to
+                        influence how large platforms design safety systems for children.
+                    </p>
+
+                    <div class="source-note">
+                        Status: Ongoing allegations and legal proceedings.
+                    </div>
+                </article>
+
+                <article>
+                    <div class="article-meta">
+                        <span class="label blue">Community debate</span>
+                        <span class="date">Summer 2026</span>
+                    </div>
+
+                    <h3>The argument over creator-led predator investigations</h3>
+
+                    <p>
+                        The dispute surrounding Roblox creator Schlep continued to
+                        shape conversations about online safety. Supporters said that
+                        independent creators helped bring attention to problems they
+                        believed the platform had failed to handle.
+                    </p>
+
+                    <p>
+                        Critics argued that unofficial sting operations can involve
+                        impersonation, expose users to additional danger, and interfere
+                        with professional investigations.
+                    </p>
+
+                    <p>
+                        At the heart of the debate is a difficult question: should
+                        online creators investigate alleged predators themselves, or
+                        should every report go through the platform and law enforcement?
+                    </p>
+
+                    <div class="source-note">
+                        Status: Community controversy; individual claims require verification.
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="steam" class="platform-section">
+            <div class="section-heading">
+                <h2>Steam</h2>
+                <span>Ownership, censorship, and digital storefronts</span>
+            </div>
+
+            <div class="articles">
+                <article>
+                    <div class="article-meta">
+                        <span class="label gold">Industry issue</span>
+                        <span class="date">June–July 2026</span>
+                    </div>
+
+                    <h3>Who decides which games can be sold?</h3>
+
+                    <p>
+                        Developers and players continued debating the removal or
+                        restriction of adult, sexual, and queer-themed games from
+                        digital storefronts.
+                    </p>
+
+                    <p>
+                        Critics argued that payment processors and platform policies
+                        were influencing which legal games developers could sell.
+                        Supporters of stricter rules said storefronts need standards
+                        that protect users, payment partners, and their own businesses.
+                    </p>
+
+                    <p>
+                        The controversy has become part of a larger discussion about
+                        censorship, independent development, payment networks, and the
+                        power that digital stores have over small studios.
+                    </p>
+
+                    <div class="source-note">
+                        Status: Ongoing industry and community debate.
+                    </div>
+                </article>
+
+                <article>
+                    <div class="article-meta">
+                        <span class="label">Player movement</span>
+                        <span class="date">June–September 11, 2026</span>
+                    </div>
+
+                    <h3>Digital ownership remains a major player concern</h3>
+
+                    <p>
+                        Players continued questioning what it really means to “own”
+                        a digital game. The argument became especially intense around
+                        online-only games that can become unplayable when servers close.
+                    </p>
+
+                    <p>
+                        The wider Stop Killing Games movement pushed for clearer
+                        consumer rights, better game preservation, and solutions that
+                        keep purchased games functional after official support ends.
+                    </p>
+
+                    <p>
+                        Publishers have raised practical and security concerns about
+                        private servers and long-term support. Players counter that
+                        customers should not lose access without meaningful options.
+                    </p>
+
+                    <div class="source-note">
+                        Status: Ongoing consumer-rights and preservation debate.
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="tiktok" class="platform-section">
+            <div class="section-heading">
+                <h2>TikTok</h2>
+                <span>Algorithms, money, and creator pressure</span>
+            </div>
+
+            <div class="articles">
+                <article>
+                    <div class="article-meta">
+                        <span class="label blue">Creator economy</span>
+                        <span class="date">June–September 11, 2026</span>
+                    </div>
+
+                    <h3>Creators question changing reach and income</h3>
+
+                    <p>
+                        TikTok creators continued to complain about sudden changes in
+                        views, recommendations, monetization, and account enforcement.
+                        Smaller creators were particularly concerned that algorithm
+                        updates could make their audiences disappear overnight.
+                    </p>
+
+                    <p>
+                        TikTok Shop also remained controversial. Some users welcomed
+                        new ways for creators to earn money, while others criticized
+                        aggressive selling, affiliate advertising, and unclear
+                        sponsorship disclosures.
+                    </p>
+
+                    <p>
+                        The disagreement reflects a larger problem in creator culture:
+                        many people build their careers on platforms whose rules and
+                        recommendation systems can change without warning.
+                    </p>
+
+                    <div class="source-note">
+                        Status: Broad platform and creator-economy controversy.
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="twitch" class="platform-section">
+            <div class="section-heading">
+                <h2>Twitch</h2>
+                <span>Streaming, bans, and the fight for attention</span>
+            </div>
+
+            <div class="articles">
+                <article>
+                    <div class="article-meta">
+                        <span class="label blue">Streaming culture</span>
+                        <span class="date">June–September 11, 2026</span>
+                    </div>
+
+                    <h3>Small streamers push back against a crowded platform</h3>
+
+                    <p>
+                        Twitch communities continued debating discoverability,
+                        advertising, subscriptions, sponsorships, and streamer bans.
+                        Smaller channels argued that it is becoming increasingly
+                        difficult to compete with established creators.
+                    </p>
+
+                    <p>
+                        The platform’s economy also generated tension. Streamers rely
+                        on a combination of subscriptions, advertising, donations,
+                        sponsorships, and special events, but each income source can
+                        change quickly.
+                    </p>
+
+                    <p>
+                        Viewers, meanwhile, questioned whether Twitch’s biggest
+                        promotions benefit the wider community or mostly reward the
+                        same group of already-successful streamers.
+                    </p>
+
+                    <div class="source-note">
+                        Status: Ongoing platform and creator-economy discussion.
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="youtube" class="platform-section">
+            <div class="section-heading">
+                <h2>YouTube</h2>
+                <span>Demonetization, copyright, and artificial intelligence</span>
+            </div>
+
+            <div class="articles">
+                <article>
+                    <div class="article-meta">
+                        <span class="label">Creator conflict</span>
+                        <span class="date">June–September 11, 2026</span>
+                    </div>
+
+                    <h3>Creators criticize automated enforcement</h3>
+
+                    <p>
+                        YouTube creators continued to challenge demonetization,
+                        copyright claims, strikes, and decisions made by automated
+                        moderation systems.
+                    </p>
+
+                    <p>
+                        Gaming channels, commentary creators, reaction channels, and
+                        livestreamers have all complained that a video can lose
+                        advertising or visibility before the creator receives a clear
+                        explanation.
+                    </p>
+
+                    <p>
+                        The dispute is not only about money. Creators also worry that
+                        repeated strikes or copyright claims can damage a channel’s
+                        reputation and make years of work difficult to protect.
+                    </p>
+
+                    <div class="source-note">
+                        Status: Ongoing creator-platform dispute.
+                    </div>
+                </article>
+
+                <article>
+                    <div class="article-meta">
+                        <span class="label gold">Artificial intelligence</span>
+                        <span class="date">June–September 11, 2026</span>
+                    </div>
+
+                    <h3>Viewers push back against low-effort AI videos</h3>
+
+                    <p>
+                        Artificial intelligence remained one of YouTube’s most
+                        divisive subjects. Some creators used AI for editing, research,
+                        thumbnails, and accessibility features.
+                    </p>
+
+                    <p>
+                        Other channels were criticized for mass-producing videos with
+                        synthetic voices, recycled scripts, and misleading titles.
+                        Viewers argued that this content makes search results harder to
+                        trust and reduces opportunities for human creators.
+                    </p>
+
+                    <p>
+                        YouTube’s challenge is deciding how to support useful AI tools
+                        without allowing automated content farms to overwhelm the site.
+                    </p>
+
+                    <div class="source-note">
+                        Status: Ongoing policy and quality debate.
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="reddit" class="platform-section">
+            <div class="section-heading">
+                <h2>Reddit</h2>
+                <span>Moderation, bans, and community control</span>
+            </div>
+
+            <div class="articles">
+                <article>
+                    <div class="article-meta">
+                        <span class="label blue">Community conflict</span>
+                        <span class="date">June–September 11, 2026</span>
+                    </div>
+
+                    <h3>Reddit users debate who controls communities</h3>
+
+                    <p>
+                        Reddit communities continued arguing about moderator power,
+                        subreddit bans, deleted posts, political arguments, and the
+                        role of volunteer teams.
+                    </p>
+
+                    <p>
+                        Critics said that individual moderators can sometimes control
+                        large communities with little accountability. Moderators
+                        responded that volunteer labor is essential because Reddit
+                        cannot personally review every post and comment.
+                    </p>
+
+                    <p>
+                        The conflict also reflects Reddit’s changing business model.
+                        Users want communities to remain independent, while the company
+                        needs advertising, traffic, and consistent enforcement to grow.
+                    </p>
+
+                    <div class="source-note">
+                        Status: Ongoing community and platform-governance debate.
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p><strong>Drama Articles</strong></p>
+        <p>Internet and gaming culture coverage · Last updated September 11, 2026</p>
+        <p>
+            This site is an independent project and is not affiliated with Roblox,
+            Steam, TikTok, Twitch, YouTube, or Reddit.
+        </p>
+    </footer>
+
+</body>
+</html>
